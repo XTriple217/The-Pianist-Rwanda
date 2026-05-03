@@ -51,12 +51,6 @@ const stats = [
   { value: "8+", label: "Years of Excellence" },
 ];
 
-const highlights = [
-  "School music partnerships with performance outcomes",
-  "Private coaching for children, adults, and families",
-  "Live ensembles for weddings, galas, and premium events",
-];
-
 const servicePillars = [
   {
     icon: School,
@@ -143,14 +137,6 @@ const instrumentFocus = [
   { title: "Violin & Strings", image: violinImage },
   { title: "Brass & Woodwind", image: trumpetImage },
   { title: "Cello Studies", image: celloImage },
-];
-
-const gallery = [
-  { title: "Vocal Showcase", image: singerImage, span: "col-span-2 row-span-2" },
-  { title: "Trumpet Training", image: trumpetImage, span: "" },
-  { title: "Cello Studies", image: celloImage, span: "" },
-  { title: "Violin Practice", image: violinImage, span: "col-span-2" },
-  { title: "Saxophone Performance", image: saxophoneImage, span: "" },
 ];
 
 const eventFormats = [
