@@ -51,6 +51,12 @@ const stats = [
   { value: "8+", label: "Years of Excellence" },
 ];
 
+const highlights = [
+  "School music partnerships with performance outcomes",
+  "Private coaching for children, adults, and families",
+  "Live ensembles for weddings, galas, and premium events",
+];
+
 const servicePillars = [
   {
     icon: School,
@@ -137,6 +143,14 @@ const instrumentFocus = [
   { title: "Violin & Strings", image: violinImage },
   { title: "Brass & Woodwind", image: trumpetImage },
   { title: "Cello Studies", image: celloImage },
+];
+
+const gallery = [
+  { title: "Vocal Showcase", image: singerImage, span: "col-span-2 row-span-2" },
+  { title: "Trumpet Training", image: trumpetImage, span: "" },
+  { title: "Cello Studies", image: celloImage, span: "" },
+  { title: "Violin Practice", image: violinImage, span: "col-span-2" },
+  { title: "Saxophone Performance", image: saxophoneImage, span: "" },
 ];
 
 const eventFormats = [
@@ -467,33 +481,21 @@ export default function App() {
 
         {/* ── NAVIGATION ─────────────────────────────────────────────────────── */}
         <header style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          transition: "all 0.4s ease",
-          background: scrolled ? "rgba(6,8,14,0.92)" : "transparent",
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+          transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
+          background: scrolled ? "rgba(6,8,14,0.95)" : "rgba(6,8,14,0.0)",
           backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid var(--border-gold)" : "1px solid transparent",
+          borderBottom: scrolled ? "1px solid rgba(201,168,76,0.22)" : "1px solid transparent",
         }}>
-          <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 2rem" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "80px" }}>
+          <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "72px" }}>
 
               {/* Logo */}
-              <a href="#home" style={{ display: "flex", alignItems: "center", gap: "14px", textDecoration: "none" }}>
-                <div style={{
-                  width: 44, height: 44,
-                  borderRadius: "12px",
-                  background: "linear-gradient(135deg, #D4A843, #8B5E1A)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: "0 0 24px rgba(201,168,76,0.3)",
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.4rem", fontWeight: 600, color: "#fff",
-                }}>P</div>
+              <a href="#home" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", zIndex: 60 }}>
+                <div style={{ width: 40, height: 40, borderRadius: "11px", background: "linear-gradient(135deg, #D4A843, #8B5E1A)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(201,168,76,0.28)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 600, color: "#fff", flexShrink: 0 }}>P</div>
                 <div>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.3em", color: "#E8EAF2" }}>PIANISTAR</p>
-                  <p style={{ fontSize: "0.6rem", letterSpacing: "0.45em", color: "var(--gold)", marginTop: "-2px" }}>MUSIC GROUP</p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 600, letterSpacing: "0.28em", color: "#E8EAF2", lineHeight: 1.2 }}>PIANISTAR</p>
+                  <p style={{ fontSize: "0.55rem", letterSpacing: "0.42em", color: "var(--gold)", marginTop: "1px" }}>MUSIC GROUP</p>
                 </div>
               </a>
 
@@ -501,44 +503,97 @@ export default function App() {
               <nav style={{ display: "flex", gap: "2rem", alignItems: "center" }} className="hidden-mobile">
                 {navItems.map(([label, href]) => (
                   <a key={label} href={href} className="nav-link"
-                    style={{ fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(232,234,242,0.65)", textDecoration: "none" }}>
+                    style={{ fontSize: "0.73rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(232,234,242,0.65)", textDecoration: "none" }}>
                     {label}
                   </a>
                 ))}
               </nav>
 
-              <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-                <button onClick={() => setModalOpen(true)} className="btn-gold"
-                  style={{ padding: "10px 22px", borderRadius: "10px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", cursor: "pointer", fontWeight: 500 }}>
+              <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                <button onClick={() => setModalOpen(true)} className="btn-gold hidden-mobile"
+                  style={{ padding: "10px 20px", borderRadius: "10px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.73rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", cursor: "pointer", fontWeight: 500 }}>
                   Book Now
                 </button>
+                {/* Hamburger — always solid so it's visible on hero */}
                 <button onClick={() => setMenuOpen(v => !v)}
-                  style={{ display: "none", width: 44, height: 44, borderRadius: "10px", border: "1px solid var(--border)", background: "var(--surface)", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#fff" }}
-                  className="menu-btn">
+                  style={{ display: "none", width: 42, height: 42, borderRadius: "10px", border: "1px solid rgba(201,168,76,0.35)", background: "rgba(6,8,14,0.85)", backdropFilter: "blur(12px)", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#E8EAF2", flexShrink: 0, zIndex: 60 }}
+                  className="menu-btn" aria-label="Toggle menu">
                   {menuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
               </div>
             </div>
-
-            {/* Mobile menu */}
-            {menuOpen && (
-              <div style={{ borderTop: "1px solid var(--border-gold)", padding: "1.5rem 0", display: "grid", gap: "4px" }}>
-                {navItems.map(([label, href]) => (
-                  <a key={label} href={href} onClick={() => setMenuOpen(false)}
-                    style={{ padding: "12px 16px", fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(232,234,242,0.7)", textDecoration: "none", borderRadius: "8px", transition: "background 0.2s" }}
-                    onMouseEnter={e => (e.currentTarget.style.background = "var(--surface)")}
-                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
-                    {label}
-                  </a>
-                ))}
-                <button onClick={() => { setMenuOpen(false); setModalOpen(true); }} className="btn-gold"
-                  style={{ marginTop: "12px", padding: "13px", borderRadius: "10px", fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", cursor: "pointer", fontWeight: 500 }}>
-                  Book Now
-                </button>
-              </div>
-            )}
           </div>
         </header>
+
+        {/* ── MOBILE FULL-SCREEN MENU (outside header so it covers everything) ── */}
+        {menuOpen && (
+          <div style={{
+            position: "fixed", inset: 0, zIndex: 49,
+            background: "rgba(4,5,10,0.98)",
+            backdropFilter: "blur(24px)",
+            display: "flex", flexDirection: "column",
+            paddingTop: "88px", paddingBottom: "2rem",
+            overflowY: "auto",
+          }}>
+            {/* Gold top accent line */}
+            <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.6), transparent)", marginBottom: "0.5rem" }} />
+
+            {/* Nav links */}
+            <nav style={{ padding: "1rem 1.5rem", display: "grid", gap: "2px", flex: 1 }}>
+              {navItems.map(([label, href], i) => (
+                <a key={label} href={href} onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "16px 20px",
+                    fontSize: "1.1rem", fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, letterSpacing: "0.12em",
+                    color: "rgba(232,234,242,0.85)", textDecoration: "none",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    transition: "color 0.2s, padding-left 0.2s",
+                    animationDelay: `${i * 40}ms`,
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "var(--gold-light)"; e.currentTarget.style.paddingLeft = "26px"; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = "rgba(232,234,242,0.85)"; e.currentTarget.style.paddingLeft = "20px"; }}>
+                  <span>{label}</span>
+                  <ArrowRight size={14} style={{ color: "rgba(201,168,76,0.45)" }} />
+                </a>
+              ))}
+            </nav>
+
+            {/* Bottom CTA block */}
+            <div style={{ padding: "1.5rem", margin: "0 1.5rem", border: "1px solid rgba(201,168,76,0.22)", borderRadius: "16px", background: "linear-gradient(135deg, rgba(201,168,76,0.07), rgba(6,8,14,0.6))" }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "rgba(232,234,242,0.6)", marginBottom: "1rem", letterSpacing: "0.04em" }}>Ready to start your music journey?</p>
+              <button onClick={() => { setMenuOpen(false); setModalOpen(true); }} className="btn-gold"
+                style={{ width: "100%", padding: "14px", borderRadius: "12px", fontSize: "0.82rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                Book Now <ArrowRight size={15} />
+              </button>
+              <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                <a href="tel:+250790359656"
+                  style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "11px", borderRadius: "10px", border: "1px solid rgba(201,168,76,0.22)", background: "rgba(201,168,76,0.05)", color: "rgba(232,234,242,0.75)", textDecoration: "none", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <Phone size={13} /> Call
+                </a>
+                <a href={whatsappTarget} target="_blank" rel="noreferrer"
+                  style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "11px", borderRadius: "10px", border: "1px solid rgba(201,168,76,0.22)", background: "rgba(201,168,76,0.05)", color: "rgba(232,234,242,0.75)", textDecoration: "none", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <MessageCircle size={13} /> WhatsApp
+                </a>
+              </div>
+            </div>
+
+            {/* Social icons */}
+            <div style={{ display: "flex", justifyContent: "center", gap: "12px", padding: "1.5rem 1.5rem 0" }}>
+              {[
+                { Icon: YouTubeIcon, href: "https://www.youtube.com/@pianistars", label: "YouTube" },
+                { Icon: TikTokIcon, href: "https://www.tiktok.com/@kevinpianistar", label: "TikTok" },
+                { Icon: InstagramIcon, href: "https://www.instagram.com/kevinpianistar?igsh=dmRoMjh4cmxwdTB3", label: "Instagram" },
+                { Icon: MessageCircle, href: whatsappTarget, label: "WhatsApp" },
+              ].map(item => (
+                <a key={item.label} href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}
+                  style={{ width: 42, height: 42, borderRadius: "10px", border: "1px solid rgba(201,168,76,0.2)", background: "rgba(201,168,76,0.05)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(201,168,76,0.7)", textDecoration: "none" }}>
+                  <item.Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         <main>
 
@@ -939,7 +994,7 @@ export default function App() {
               </div>
             </Reveal>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5px", background: "var(--border-gold)", borderRadius: "20px", overflow: "hidden", marginBottom: "2rem" }}>
+            <div className="talent-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5px", background: "var(--border-gold)", borderRadius: "20px", overflow: "hidden", marginBottom: "2rem" }}>
               {talentJourney.map((step, i) => {
                 const Icon = step.icon;
                 return (
@@ -1053,7 +1108,7 @@ export default function App() {
         {/* ── FOOTER ─────────────────────────────────────────────────────────── */}
         <footer style={{ borderTop: "1px solid var(--border-gold)", background: "rgba(6,7,12,0.98)", padding: "5rem 2rem 3rem" }}>
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "4rem", marginBottom: "4rem" }}>
+            <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "4rem", marginBottom: "4rem" }}>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "1.5rem" }}>
                   <div style={{ width: 44, height: 44, borderRadius: "12px", background: "linear-gradient(135deg, #D4A843, #8B5E1A)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 600, color: "#fff", boxShadow: "0 0 20px rgba(201,168,76,0.25)" }}>P</div>
@@ -1133,12 +1188,12 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ borderTop: "1px solid var(--border)", paddingTop: "2rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+            <div className="footer-bottom" style={{ borderTop: "1px solid var(--border)", paddingTop: "2rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
               <p style={{ fontSize: "0.78rem", color: "rgba(232,234,242,0.3)" }}>
                 © {new Date().getFullYear()} Pianistar Music Group. All rights reserved.
               </p>
               <p style={{ fontSize: "0.78rem", color: "rgba(232,234,242,0.3)" }}>
-                Developed by <span style={{ color: "var(--gold)", fontWeight: 500 }}>Axis Rwanda</span>
+                Developed by <span style={{ color: "var(--gold)", fontWeight: 500 }}>Virexus Rwanda</span>
               </p>
             </div>
           </div>
@@ -1222,8 +1277,9 @@ export default function App() {
         </div>
       )}
 
-      {/* Responsive overrides */}
+      {/* ── RESPONSIVE OVERRIDES ── */}
       <style>{`
+        /* ── Desktop nav show/hide ── */
         @media (max-width: 900px) {
           .hidden-mobile { display: none !important; }
           .menu-btn { display: flex !important; }
@@ -1231,15 +1287,76 @@ export default function App() {
         @media (min-width: 901px) {
           .menu-btn { display: none !important; }
         }
+
+        /* ── Tablet (≤768px) ── */
         @media (max-width: 768px) {
-          #about > div, #instruments > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .hero-stats { grid-template-columns: repeat(2, 1fr) !important; }
-          #for-schools > div:nth-child(3) { grid-template-columns: 1fr 1fr !important; }
-          #events > div:nth-child(3) > div:last-child > div { padding: 2rem !important; }
+          #about > div,
+          #instruments > div {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+          .hero-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          #for-schools > div:nth-child(3) {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          #events > div:nth-child(3) > div:last-child > div {
+            padding: 2rem !important;
+          }
         }
-        @media (max-width: 600px) {
-          section { padding: 5rem 1.25rem !important; }
+
+        /* ── iPhone XR and similar (≤414px) ── */
+        @media (max-width: 414px) {
+          section {
+            padding: 4.5rem 1.1rem !important;
+          }
+
+          /* ── Talent Development grid: 1 column, no gap-border layout ── */
+          .talent-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+          }
+          .talent-grid > * {
+            border-bottom: 1px solid rgba(201,168,76,0.18) !important;
+          }
+          .talent-grid > *:last-child {
+            border-bottom: none !important;
+          }
+
+          /* ── Footer: fully stacked single column ── */
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.2rem !important;
+          }
+
+          /* ── Footer bottom bar: stack copyright + credit ── */
+          .footer-bottom {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.5rem !important;
+          }
+
+          /* ── Modal form: single column ── */
           .modal-grid { grid-template-columns: 1fr !important; }
+
+          /* ── Hero stats: 2 columns on small screen ── */
+          .hero-stats { grid-template-columns: repeat(2, 1fr) !important; }
+
+          /* ── General two-col grids: stack ── */
+          #about > div,
+          #instruments > div {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+
+        /* ── Very small phones (≤375px, e.g. iPhone SE) ── */
+        @media (max-width: 375px) {
+          section { padding: 4rem 1rem !important; }
+          .footer-grid { gap: 2rem !important; }
         }
       `}</style>
     </>
